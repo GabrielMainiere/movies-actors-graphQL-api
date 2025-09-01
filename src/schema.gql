@@ -1,0 +1,84 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Genre {
+  id: ID!
+  name: String!
+  movies: [Movie!]
+}
+
+type Movie {
+  id: ID!
+  name: String!
+  synopsis: String
+  duration: Float
+  actors: [Actor!]
+  genres: [Genre!]
+}
+
+type Actor {
+  id: ID!
+  name: String!
+  birthdate: DateTime!
+  movies: [Movie!]
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  actors: [Actor!]!
+  actor(id: Int!): Actor!
+  genres: [Genre!]!
+  genre(id: Int!): Genre!
+  movies: [Movie!]!
+  movie(id: Int!): Movie!
+}
+
+type Mutation {
+  createActor(createActorInput: CreateActorInput!): Actor!
+  updateActor(updateActorInput: UpdateActorInput!): Actor!
+  removeActor(id: Int!): Actor!
+  createGenre(createGenreInput: CreateGenreInput!): Genre!
+  updateGenre(updateGenreInput: UpdateGenreInput!): Genre!
+  removeGenre(id: Int!): Genre!
+  createMovie(createMovieInput: CreateMovieInput!): Movie!
+  updateMovie(updateMovieInput: UpdateMovieInput!): Movie!
+  removeMovie(id: Int!): Movie!
+}
+
+input CreateActorInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateActorInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateGenreInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateGenreInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}
+
+input CreateMovieInput {
+  """Example field (placeholder)"""
+  exampleField: Int!
+}
+
+input UpdateMovieInput {
+  """Example field (placeholder)"""
+  exampleField: Int
+  id: Int!
+}

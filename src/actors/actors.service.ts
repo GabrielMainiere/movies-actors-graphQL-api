@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { CreateActorInput } from './dto/create-actor.input';
-import { UpdateActorInput } from './dto/update-actor.input';
+import { CreateActorInput } from './schemas/create-actor.input';
+import { UpdateActorInput } from './schemas/update-actor.input';
 
 @Injectable()
 export class ActorsService {

@@ -1,7 +1,50 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  BelongsToMany,
+} from 'sequelize-typescript';
+import { Actor } from '../../actors/entities/actor.entity';
+import { Genre } from '../../genres/entities/genre.entity';
+import { MovieActors } from './movie_actor.entity';
+import { MovieGenres } from './movie_genres.entity';
+import { ObjectType, Field, ID, Float } from '@nestjs/graphql';
 
 @ObjectType()
-export class Movie {
-  @Field(() => Int, { description: 'Example field (placeholder)' })
-  exampleField: number;
+@Table({
+  tableName: 'movies_tbl',
+  timestamps: true,
+})
+export class Movie extends Model<Movie> {
+  @Field(() => ID)
+  @Column({
+    type: DataType.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  })
+  declare id: number;
+
+  @Field()
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  declare name: string;
+
+  @Field({ nullable: true })
+  @Column(DataType.STRING)
+  declare synopsis: string;
+
+  @Field(() => Float, { nullable: true })
+  @Column(DataType.DECIMAL)
+  declare duration: number;
+
+  @Field(() => [Actor], { nullable: true }) 
+  @BelongsToMany(() => Actor, () => MovieActors)
+  declare actors: Actor[];
+
+  @Field(() => [Genre], { nullable: true })
+  @BelongsToMany(() => Genre, () => MovieGenres)
+  declare genres: Genre[];
 }

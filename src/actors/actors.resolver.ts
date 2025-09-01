@@ -1,8 +1,9 @@
+
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ActorsService } from './actors.service';
 import { Actor } from './entities/actor.entity';
-import { CreateActorInput } from './dto/create-actor.input';
-import { UpdateActorInput } from './dto/update-actor.input';
+import { CreateActorInput } from './schemas/create-actor.input';
+import { UpdateActorInput } from './schemas/update-actor.input';
 
 @Resolver(() => Actor)
 export class ActorsResolver {
