@@ -41,7 +41,7 @@ type Query {
 type Mutation {
   createActor(createActorInput: CreateActorInput!): Actor!
   updateActor(updateActorInput: UpdateActorInput!): Actor!
-  removeActor(id: Int!): Actor!
+  removeActor(id: Int!): Boolean!
   createGenre(createGenreInput: CreateGenreInput!): Genre!
   updateGenre(updateGenreInput: UpdateGenreInput!): Genre!
   removeGenre(id: Int!): Boolean!

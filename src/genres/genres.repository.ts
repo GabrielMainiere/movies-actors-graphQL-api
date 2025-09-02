@@ -13,15 +13,15 @@ export class GenresRepository {
   ) {}
 
   async create(createGenreInput: CreateGenreInput): Promise<Genre> {
-    return this.genreModel.create(createGenreInput as CreationAttributes<Genre>);
+    return await this.genreModel.create(createGenreInput as CreationAttributes<Genre>);
   }
 
   async findAll(): Promise<Genre[]> {
-    return this.genreModel.findAll();
+    return await this.genreModel.findAll();
   }
 
   async findOne(id: number): Promise<Genre | null> {
-    return this.genreModel.findByPk(id);
+    return await this.genreModel.findByPk(id);
   }
 
   async update(id: number, updateGenreInput: UpdateGenreInput): Promise<Genre | null> {
