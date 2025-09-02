@@ -1,10 +1,4 @@
-import {
-  Table,
-  Column,
-  Model,
-  DataType,
-  BelongsToMany,
-} from 'sequelize-typescript';
+import { Table, Column, Model, DataType, BelongsToMany } from 'sequelize-typescript';
 import { Actor } from '../../actors/entities/actor.entity';
 import { Genre } from '../../genres/entities/genre.entity';
 import { MovieActors } from './movie_actor.entity';
@@ -16,7 +10,7 @@ import { ObjectType, Field, ID, Float } from '@nestjs/graphql';
   tableName: 'movies_tbl',
   timestamps: true,
 })
-export class Movie extends Model<Movie> {
+export class Movie extends Model{
   @Field(() => ID)
   @Column({
     type: DataType.INTEGER,
@@ -32,15 +26,21 @@ export class Movie extends Model<Movie> {
   })
   declare name: string;
 
-  @Field({ nullable: true })
-  @Column(DataType.STRING)
+  @Field()
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   declare synopsis: string;
 
-  @Field(() => Float, { nullable: true })
-  @Column(DataType.DECIMAL)
+  @Field(() => Float)
+  @Column({
+    type: DataType.DECIMAL,
+    allowNull: false,
+  })
   declare duration: number;
 
-  @Field(() => [Actor], { nullable: true }) 
+  @Field(() => [Actor], { nullable: true })
   @BelongsToMany(() => Actor, () => MovieActors)
   declare actors: Actor[];
 
