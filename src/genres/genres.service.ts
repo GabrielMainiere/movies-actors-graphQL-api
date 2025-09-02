@@ -9,7 +9,7 @@ export class GenresService {
   constructor(private readonly genresRepository: GenresRepository) {}
 
   async create(createGenreInput: CreateGenreInput): Promise<Genre> {
-    return this.genresRepository.create(createGenreInput);
+    return await this.genresRepository.create(createGenreInput);
   }
 
   async findAll(): Promise<Genre[]> {
