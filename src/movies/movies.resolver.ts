@@ -32,4 +32,28 @@ export class MoviesResolver {
     async removeMovie(@Args('id', { type: () => Int }) id: number) {
     return await this.moviesService.remove(id);
   }
+
+  @Mutation(() => Movie)
+  async addActorsInMovies(
+    @Args('movieId', { type: () => Int }) movieId: number,
+    @Args('actorsIds', { type: () => [Int] }) actorsIds: number[],
+  ) {
+    return this.moviesService.addActorsInMovies(movieId, actorsIds);
+  }
+
+  @Mutation(() => Movie)
+  async removeActorFromMovie(
+    @Args('movieId', { type: () => Int }) movieId: number,
+    @Args('actorIds', { type: () => Int }) actorIds: number,
+  ) {
+    return this.moviesService.removeActorFromMovie(movieId, actorIds);
+  }
+
+  @Mutation(() => Movie)
+  async addGenresInMovies(
+    @Args('movieId', { type: () => Int }) movieId: number,
+    @Args('genreIds', { type: () => [Int] }) genreIds: number[],
+  ) {
+    return this.moviesService.addGenresInMovies(movieId, genreIds);
+  }
 }

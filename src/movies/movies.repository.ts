@@ -53,4 +53,34 @@ export class MoviesRepository {
     await movie.destroy();
     return true;
   }
+
+  async addActors(MovieId: number, actorIds: number[]): Promise<Movie | null> {
+    const movie = await this.movieModel.findByPk(MovieId, { include: [Actor] });
+    if (!movie) return null;
+
+    for (const actorId of actorIds) {
+      await this.movieActorsModel.findOrCreate({ where: { movieId: MovieId, actorId: actorId } });
+    }
+
+    return this.findOne(MovieId);
+  }
+
+  async removeActor(MovieId: number, actorId: number): Promise<Movie | null> {
+    const movie = await this.movieModel.findByPk(MovieId, { include: [Actor] });
+    if (!movie) return null;
+
+    await this.movieActorsModel.destroy({ where: { movieId: MovieId, actorId } });
+
+    return this.findOne(MovieId);
+  }
+
+  async addGenres(MovieId: number, genreIds: number[]): Promise<Movie | null> {
+    const movie = await this.movieModel.findByPk(MovieId, { include: [Genre] });
+    if (!movie) return null;
+
+    for (const genreId of genreIds) {
+      await this.movieGenresModel.findOrCreate({ where: { movieId: MovieId, genreId: genreId } });
+    }
+    return this.findOne(MovieId);
+  }
 }

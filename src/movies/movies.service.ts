@@ -35,4 +35,22 @@ export class MoviesService {
     if (!deleted) throw new NotFoundException(`Movie with ID ${id} not found. Unable to delete.`);
     return deleted;
   }
+
+  async addActorsInMovies(movieId: number, actorIds: number[]): Promise<Movie> {
+    const movie = await this.moviesRepository.addActors(movieId, actorIds);
+    if (!movie) throw new NotFoundException(`Movie with ID ${movieId} not found`);
+    return movie;
+  }
+
+  async removeActorFromMovie(movieId: number, actorId: number): Promise<Movie> {
+    const movie = await this.moviesRepository.removeActor(movieId, actorId);
+    if (!movie) throw new NotFoundException(`Movie with ID ${movieId} not found`);
+    return movie;
+  }
+
+  async addGenresInMovies(movieId: number, genreIds: number[]): Promise<Movie> {
+    const movie = await this.moviesRepository.addGenres(movieId, genreIds);
+    if (!movie) throw new NotFoundException(`Movie with ID ${movieId} not found`);
+    return movie;
+  }
 }
