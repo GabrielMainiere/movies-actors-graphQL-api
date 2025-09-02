@@ -9,27 +9,27 @@ export class MoviesResolver {
   constructor(private readonly moviesService: MoviesService) {}
 
   @Mutation(() => Movie)
-  createMovie(@Args('createMovieInput') createMovieInput: CreateMovieInput) {
-    return this.moviesService.create(createMovieInput);
+  async createMovie(@Args('createMovieInput') createMovieInput: CreateMovieInput) {
+    return await this.moviesService.create(createMovieInput);
   }
 
   @Query(() => [Movie], { name: 'movies' })
-  findAll() {
-    return this.moviesService.findAll();
+  async findAll() {
+    return await this.moviesService.findAll();
   }
 
   @Query(() => Movie, { name: 'movie' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
-    return this.moviesService.findOne(id);
+  async findOne(@Args('id', { type: () => Int }) id: number) {
+    return await this.moviesService.findOne(id);
   }
 
   @Mutation(() => Movie)
-  updateMovie(@Args('updateMovieInput') updateMovieInput: UpdateMovieInput) {
-    return this.moviesService.update(updateMovieInput.id, updateMovieInput);
+  async updateMovie(@Args('updateMovieInput') updateMovieInput: UpdateMovieInput) {
+    return await this.moviesService.update(updateMovieInput.id, updateMovieInput);
   }
 
-  @Mutation(() => Movie)
-  removeMovie(@Args('id', { type: () => Int }) id: number) {
-    return this.moviesService.remove(id);
+  @Mutation(() => Boolean)
+    async removeMovie(@Args('id', { type: () => Int }) id: number) {
+    return await this.moviesService.remove(id);
   }
 }

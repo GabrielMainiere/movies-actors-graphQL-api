@@ -11,8 +11,8 @@ type Genre {
 type Movie {
   id: ID!
   name: String!
-  synopsis: String
-  duration: Float
+  synopsis: String!
+  duration: Float!
   actors: [Actor!]
   genres: [Genre!]
 }
@@ -47,38 +47,38 @@ type Mutation {
   removeGenre(id: Int!): Genre!
   createMovie(createMovieInput: CreateMovieInput!): Movie!
   updateMovie(updateMovieInput: UpdateMovieInput!): Movie!
-  removeMovie(id: Int!): Movie!
+  removeMovie(id: Int!): Boolean!
 }
 
 input CreateActorInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  birthdate: DateTime!
 }
 
 input UpdateActorInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
+  birthdate: DateTime
   id: Int!
 }
 
 input CreateGenreInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
 }
 
 input UpdateGenreInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
   id: Int!
 }
 
 input CreateMovieInput {
-  """Example field (placeholder)"""
-  exampleField: Int!
+  name: String!
+  synopsis: String!
+  duration: Float!
 }
 
 input UpdateMovieInput {
-  """Example field (placeholder)"""
-  exampleField: Int
+  name: String
+  synopsis: String
+  duration: Float
   id: Int!
 }
