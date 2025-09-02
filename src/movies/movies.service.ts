@@ -14,7 +14,7 @@ export class MoviesService {
 
   async findAll(): Promise<Movie[]> {
     const movies = await this.moviesRepository.findAll();
-    if (movies.length === 0) throw new NotFoundException(`No movies in database.`)
+    if (!movies || movies.length === 0) throw new NotFoundException(`No movies in database.`)
     return await this.moviesRepository.findAll();
   }
 

@@ -28,7 +28,7 @@ export class GenresResolver {
     return this.genresService.update(updateGenreInput.id, updateGenreInput);
   }
 
-  @Mutation(() => Genre)
+  @Mutation(() => Boolean)
   removeGenre(@Args('id', { type: () => Int }) id: number) {
     return this.genresService.remove(id);
   }

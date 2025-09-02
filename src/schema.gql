@@ -44,7 +44,7 @@ type Mutation {
   removeActor(id: Int!): Actor!
   createGenre(createGenreInput: CreateGenreInput!): Genre!
   updateGenre(updateGenreInput: UpdateGenreInput!): Genre!
-  removeGenre(id: Int!): Genre!
+  removeGenre(id: Int!): Boolean!
   createMovie(createMovieInput: CreateMovieInput!): Movie!
   updateMovie(updateMovieInput: UpdateMovieInput!): Movie!
   removeMovie(id: Int!): Boolean!
