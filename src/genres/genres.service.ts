@@ -1,26 +1,38 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { GenresRepository } from './genres.repository';
+import { Genre } from './entities/genre.entity';
 import { CreateGenreInput } from './schemas/create-genre.input';
 import { UpdateGenreInput } from './schemas/update-genre.input';
 
 @Injectable()
 export class GenresService {
-  create(createGenreInput: CreateGenreInput) {
-    return 'This action adds a new genre';
+  constructor(private readonly genresRepository: GenresRepository) {}
+
+  async create(createGenreInput: CreateGenreInput): Promise<Genre> {
+    return this.genresRepository.create(createGenreInput);
   }
 
-  findAll() {
-    return `This action returns all genres`;
+  async findAll(): Promise<Genre[]> {
+    const genres = await this.genresRepository.findAll();
+    if (!genres || genres.length === 0) throw new NotFoundException('No genres found.');
+    return genres;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} genre`;
+  async findOne(id: number): Promise<Genre> {
+    const genre = await this.genresRepository.findOne(id);
+    if (!genre) throw new NotFoundException(`Genre with ID ${id} not found.`);
+    return genre;
   }
 
-  update(id: number, updateGenreInput: UpdateGenreInput) {
-    return `This action updates a #${id} genre`;
+  async update(id: number, updateGenreInput: UpdateGenreInput): Promise<Genre> {
+    const updated = await this.genresRepository.update(id, updateGenreInput);
+    if (!updated) throw new NotFoundException(`Genre with ID ${id} not found. Unable to update.`);
+    return updated;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} genre`;
+  async remove(id: number): Promise<boolean> {
+    const deleted = await this.genresRepository.remove(id);
+    if (!deleted) throw new NotFoundException(`Genre with ID ${id} not found. Unable to delete.`);
+    return deleted;
   }
 }
